@@ -126,8 +126,8 @@ const handleReset = () => {
 <style scoped>
 .app-shell {
   position: relative;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
   isolation: isolate;
   background: #180604;
@@ -192,6 +192,15 @@ const handleReset = () => {
 @media (max-width: 1100px) {
   .reset-button {
     right: 5vw;
+  }
+}
+
+/* 移动端（竖屏手机）：右上角重置按钮缩小并贴边 */
+@media (max-width: 820px) {
+  .reset-button {
+    top: 1.6vh;
+    right: 4vw;
+    width: clamp(2.1rem, 9vw, 2.6rem);
   }
 }
 </style>

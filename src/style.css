@@ -16,8 +16,10 @@
 html,
 body,
 #app {
-  width: 100vw;
+  width: 100%;
+  /* 100dvh 会随移动端地址栏收放同步变化，避免底部内容被地址栏裁掉 */
   height: 100vh;
+  height: 100dvh;
   margin: 0;
   overflow: hidden;
 }

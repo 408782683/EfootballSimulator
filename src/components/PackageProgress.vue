@@ -180,4 +180,29 @@ const handleSelect = (index: number) => {
     transform-origin: center center;
   }
 }
+
+/* 移动端（竖屏手机）：节点改为固定像素尺寸并居中，避免 vw 过小导致节点不可点 */
+@media (max-width: 820px) {
+  .package-progress {
+    top: 8vh;
+    left: 50%;
+    transform: translateX(-50%) scale(1);
+  }
+
+  .package-progress__node {
+    width: 1.75rem;
+  }
+
+  .package-progress__code {
+    font-size: 0.75rem;
+  }
+
+  .package-progress__line {
+    width: 0.7rem;
+  }
+
+  .package-progress__badge {
+    width: 10px;
+  }
+}
 </style>

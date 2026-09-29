@@ -191,4 +191,54 @@ const handleClose = () => {
   opacity: 0;
   transform: translate(-50%, -50%) scale(0.94);
 }
+
+/* 移动端（竖屏手机）：面板加宽、缩小内边距与卡片尺寸，保证球员列表完整可见 */
+@media (max-width: 820px) {
+  .player-detail__panel {
+    width: min(900px, 92vw);
+    max-height: 78vh;
+    max-height: 78dvh;
+    padding: 1.2rem 1rem 1rem;
+    border-radius: 1.1rem;
+  }
+
+  .player-detail__header h2 {
+    font-size: 1.4rem;
+  }
+
+  .player-detail__header p {
+    font-size: 0.85rem;
+  }
+
+  .player-detail__list {
+    grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
+    gap: 0.6rem;
+    margin-top: 1rem;
+  }
+
+  .player-detail__item {
+    padding: 0.5rem 0.3rem;
+  }
+
+  .player-detail__item img {
+    width: 56px;
+    height: 56px;
+  }
+
+  .player-detail__code {
+    font-size: 0.72rem;
+  }
+
+  .player-detail__name {
+    font-size: 0.88rem;
+  }
+
+  .player-detail__rate {
+    font-size: 0.85rem;
+  }
+
+  .player-detail__close {
+    font-size: 1.6rem;
+  }
+}
 </style>

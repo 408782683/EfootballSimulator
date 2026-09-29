@@ -187,4 +187,53 @@ const handleClose = () => {
   opacity: 0;
   transform: translate(-50%, -50%) scale(0.94);
 }
+
+/* 移动端（竖屏手机）：面板加宽、缩小球员图与间距 */
+@media (max-width: 820px) {
+  .draw-result__panel {
+    width: min(640px, 92vw);
+    max-height: 82vh;
+    max-height: 82dvh;
+    overflow-y: auto;
+    padding: 1.3rem 1rem 1.1rem;
+    border-radius: 1.1rem;
+  }
+
+  .draw-result__panel h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .draw-result__players {
+    gap: 0.9rem;
+  }
+
+  .draw-result__player img {
+    width: min(36vw, 150px);
+  }
+
+  .draw-result__player strong {
+    font-size: 1.05rem;
+  }
+
+  .draw-result__player span {
+    font-size: 0.82rem;
+  }
+
+  .draw-result__empty {
+    margin: 1.4rem 0;
+    font-size: 1.05rem;
+  }
+
+  .draw-result__confirm {
+    margin-top: 1.2rem;
+    min-width: 160px;
+    padding: 0.6rem 1.3rem;
+    font-size: 1.05rem;
+  }
+
+  .draw-result__close {
+    font-size: 1.6rem;
+  }
+}
 </style>

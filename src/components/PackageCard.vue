@@ -242,4 +242,88 @@ const bundleCount = computed(() => props.giftPackage.bundles.length)
     width: min(68vw, 575px);
   }
 }
+
+/* 移动端（竖屏手机）：卡片接近满宽、双面板纵向堆叠，并压缩纵向尺寸
+   确保底部「购买金币」按钮完整落在可视区内（vw 在竖屏下过小，需换成固定/rem 尺寸） */
+@media (max-width: 820px) {
+  .package-unit,
+  .package-unit.is-2-bundles {
+    width: min(88vw, 520px);
+  }
+
+  .package-unit__frame {
+    padding: min(14vw, 3.4rem) 4vw 1.1rem;
+    border-radius: 1.3rem;
+  }
+
+  .package-unit__code {
+    top: 0.1rem;
+    left: 1.1rem;
+    font-size: min(12.5vw, 3.1rem);
+  }
+
+  .package-unit__hint {
+    top: 0.9rem;
+    right: 1.1rem;
+    font-size: clamp(0.68rem, 3vw, 0.9rem);
+  }
+
+  .package-unit__bundles {
+    flex-direction: column;
+    gap: 1.2vh;
+  }
+
+  .package-bundle {
+    height: min(50vh, 420px);
+    padding: 0.8rem 0.9rem 0.9rem;
+    border-radius: 0.9rem;
+  }
+
+  /* 双面板礼包在窄屏上纵向排列，每块更矮 */
+  .package-unit.is-2-bundles .package-bundle {
+    height: min(26vh, 225px);
+  }
+
+  .package-bundle__skills {
+    min-height: 0.7rem;
+  }
+
+  .package-bundle__players {
+    gap: 4vw;
+    padding: 0.4rem 0;
+  }
+
+  .package-bundle__players img {
+    height: min(26vh, 230px);
+    max-width: 45%;
+    object-fit: contain;
+  }
+
+  .package-unit.is-2-bundles .package-bundle__players img {
+    height: min(13vh, 115px);
+    max-width: 42%;
+  }
+
+  .package-bundle__reward strong {
+    font-size: clamp(1.3rem, 6.4vw, 2rem);
+  }
+
+  .package-bundle__reward p {
+    font-size: clamp(0.7rem, 3.4vw, 0.95rem);
+  }
+
+  .package-bundle__thumb {
+    width: clamp(2.2rem, 12vw, 3.4rem);
+  }
+
+  .package-unit__action {
+    margin-top: 1.2vh;
+  }
+
+  .package-unit__action :deep(.purchase-button) {
+    width: 100%;
+    height: clamp(2.9rem, 7vh, 3.6rem);
+    font-size: clamp(1.1rem, 4.6vw, 1.5rem);
+  }
+}
 </style>

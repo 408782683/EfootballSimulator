@@ -12,8 +12,8 @@ const clamp = (value: number, min: number, max: number) => Math.min(Math.max(val
 
 interface CarouselOptions {
   initialIndex?: number
-  /** 当前卡片中心在 viewport 中的横向比例 */
-  focalRatio?: number
+  /** 当前卡片中心在 viewport 中的横向比例；传函数可在断点切换时动态取值 */
+  focalRatio?: number | (() => number)
   onIndexChange?: (index: number) => void
 }
 
@@ -65,6 +65,10 @@ export const useCarousel = (items: GiftPackage[], options: CarouselOptions = {})
     return list.length > 0 ? list[list.length - 1] : 0
   })
 
+  /** 每次测量时重新解析 focalRatio，兼容断点切换（如手机竖屏 / 横屏） */
+  const resolveFocalRatio = () =>
+    typeof focalRatio === 'function' ? focalRatio() : focalRatio
+
   /** 重新测量卡片中心点，双礼包卡片更宽，必须依赖真实布局 */
   const measure = () => {
     const viewport = viewportRef.value
@@ -72,7 +76,7 @@ export const useCarousel = (items: GiftPackage[], options: CarouselOptions = {})
       return
     }
 
-    focalX.value = viewport.clientWidth * focalRatio
+    focalX.value = viewport.clientWidth * resolveFocalRatio()
 
     const next: number[] = []
     for (let index = 0; index < items.length; index += 1) {

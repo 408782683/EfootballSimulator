@@ -86,4 +86,32 @@ defineEmits<{
     left: 7vw;
   }
 }
+
+/* 移动端（竖屏手机）：标题与活动倒计时压缩，避免与右上角重置按钮重叠 */
+@media (max-width: 820px) {
+  .game-header {
+    top: 1.6vh;
+    left: 4vw;
+    max-width: 76vw;
+    gap: 0.6rem;
+  }
+
+  .game-header__copy h1 {
+    font-size: clamp(1.25rem, 6.2vw, 1.9rem);
+    letter-spacing: 0.02em;
+    line-height: 1.05;
+  }
+
+  .game-header__copy p {
+    margin-top: 0.35rem;
+    font-size: clamp(0.72rem, 3.2vw, 0.95rem);
+  }
+
+  .game-header__info {
+    flex: 0 0 auto;
+    width: clamp(1.7rem, 7.6vw, 2.2rem);
+    border-width: 2px;
+    font-size: clamp(0.85rem, 3.8vw, 1.1rem);
+  }
+}
 </style>

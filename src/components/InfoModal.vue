@@ -189,4 +189,42 @@ const handleClose = () => {
   opacity: 0;
   transform: translate(-50%, -50%) scale(0.94);
 }
+
+/* 移动端（竖屏手机）：面板收窄内边距、缩小字号，让 5 列表格在窄屏内完整可读 */
+@media (max-width: 820px) {
+  .info-modal__panel {
+    width: min(680px, 92vw);
+    max-height: 82vh;
+    max-height: 82dvh;
+    padding: 1.4rem 1rem 1.2rem;
+    border-radius: 1.1rem;
+  }
+
+  .info-modal__panel h2 {
+    font-size: 1.3rem;
+  }
+
+  .info-modal__lead {
+    font-size: 0.86rem;
+    line-height: 1.6;
+  }
+
+  .info-modal__table {
+    font-size: 0.76rem;
+  }
+
+  .info-modal__table th,
+  .info-modal__table td {
+    padding: 0.45rem 0.28rem;
+  }
+
+  .info-modal__note {
+    font-size: 0.78rem;
+    line-height: 1.6;
+  }
+
+  .info-modal__close {
+    font-size: 1.6rem;
+  }
+}
 </style>

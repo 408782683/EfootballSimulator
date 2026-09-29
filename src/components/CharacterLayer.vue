@@ -34,4 +34,15 @@ const peopleSrc = `${import.meta.env.BASE_URL}assets/characters/people.png`
     opacity: 0.94;
   }
 }
+
+/* 移动端（竖屏手机）：人物改为底部居中低透明度装饰，避免遮挡礼包卡片 */
+@media (max-width: 820px) {
+  .character-layer {
+    left: 50%;
+    height: min(40vh, 340px);
+    bottom: -2vh;
+    opacity: 0.26;
+    transform: translateX(-50%);
+  }
+}
 </style>

@@ -10,6 +10,10 @@ const props = defineProps<{
   currentIndex: number
 }>()
 
+/** 移动端断点：与各组件 CSS 中的 max-width 保持一致 */
+const MOBILE_QUERY = '(max-width: 820px)'
+const mobileQuery = window.matchMedia(MOBILE_QUERY)
+
 const emit = defineEmits<{
   'update:currentIndex': [index: number]
   purchase: [packageId: number]
@@ -35,8 +39,8 @@ const {
   getItemStyle,
 } = useCarousel(props.packages, {
   initialIndex: props.currentIndex,
-  // 礼包整体靠右展示，减少左侧人物对礼包的遮挡
-  focalRatio: 0.53,
+  // 礼包整体靠右展示，减少左侧人物对礼包的遮挡；移动端卡片接近满宽，改为居中
+  focalRatio: () => (mobileQuery.matches ? 0.5 : 0.53),
   onIndexChange: (index) => emit('update:currentIndex', index),
 })
 
@@ -226,5 +230,23 @@ defineExpose({ goTo, goNext, goPrev })
 
 .package-carousel__hit-area--right {
   right: 0;
+}
+
+/* 移动端（竖屏手机）：内容区上移贴近进度条，取消左侧裁剪遮挡，缩小翻页热区 */
+@media (max-width: 820px) {
+  .package-carousel__viewport {
+    inset: 12vh 0 0;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .package-carousel__track {
+    gap: 4vw;
+  }
+
+  .package-carousel__hit-area {
+    top: 12vh;
+    width: 8vw;
+  }
 }
 </style>
