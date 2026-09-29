@@ -56,6 +56,7 @@ FootballSimulator/
 ├─ GIFT.json                # 球员池与礼包配置源
 ├─ index.html
 ├─ vite.config.ts
+├─ wrangler.jsonc           # Cloudflare Workers 部署配置
 ├─ tsconfig*.json
 └─ package.json
 ```
@@ -82,11 +83,41 @@ npm run electron
 
 # 一键构建并打包 Windows 免安装程序（输出到 release-out/win-unpacked/）
 npm run dist
+
+# 本地以 Cloudflare Workers 运行时预览（构建并启动 wrangler dev）
+npm run cf:preview
+
+# 构建并部署到 Cloudflare Workers
+npm run deploy
 ```
 
 打包完成后，进入 `release-out/win-unpacked/`，双击 `启动游戏.bat` 或 `FootballPackSimulator.exe` 即可运行，无需安装任何环境。
 
 > 说明：Windows 产物使用相对路径加载资源（`vite.config.ts` 中 `base: './'`），因此可以脱离安装目录以 `file://` 方式直接运行。
+
+## 部署到 Cloudflare Workers
+
+项目使用新版 Workers 的静态资源配置方式部署，无需单独编写 Worker 脚本：[wrangler.jsonc](file:///h:/tools/FootballSimulator/wrangler.jsonc) 中通过 `assets.directory` 将 `npm run build` 产出的 `dist/` 作为静态资源直接发布，并设置 `not_found_handling: "single-page-application"` 以支持单页应用回退。
+
+前置条件：拥有 Cloudflare 账号（首次部署时 `wrangler` 会引导登录授权）。
+
+```bash
+# 一键构建并部署（等效于 npm run build && wrangler deploy）
+npm run deploy
+
+# 本地以 Workers 运行时预览构建产物（等效于 npm run build && wrangler dev）
+npm run cf:preview
+```
+
+也可以使用 Wrangler CLI 单独执行：
+
+```bash
+npx wrangler login      # 登录 Cloudflare 账号（仅首次）
+npx wrangler deploy     # 部署 dist/ 静态资源
+npx wrangler dev        # 本地预览
+```
+
+部署完成后，Wrangler 会在输出中给出线上访问地址（形如 `https://efootball-simulator.<你的子域>.workers.dev`）。
 
 ## 礼包与概率
 
@@ -94,7 +125,7 @@ npm run dist
 
 | 球员池 | 名称 | 球员数 |
 | --- | --- | --- |
-| A | 绿茵明星 | 23 |
+| A | 绿茵明星 | 24 |
 | B | 群英荟萃 | 20 |
 | C | 名将列传 | 15 |
 

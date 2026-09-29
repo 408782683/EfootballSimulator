@@ -1,0 +1,15 @@
+{
+  // Cloudflare Workers 静态资源配置（新版 Workers 部署方式）
+  // 将 npm run build 产出的 dist/ 作为静态资源直接部署，无需单独编写 Worker 脚本
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "efootball-simulator",
+  "compatibility_date": "2026-09-29",
+  "assets": {
+    "directory": "./dist",
+    // 单页应用：未命中的路径统一回退到 index.html
+    "not_found_handling": "single-page-application"
+  },
+  "observability": {
+    "enabled": true
+  }
+}

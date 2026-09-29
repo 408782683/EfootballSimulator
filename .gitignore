@@ -14,6 +14,10 @@ release-dist-old/
 probe.html
 main.html
 
+# Cloudflare Wrangler 本地状态与生成文件
+.wrangler/
+worker-configuration.d.ts
+
 # 日志
 *.log
 npm-debug.log*
