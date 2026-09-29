@@ -117,7 +117,24 @@ npx wrangler deploy     # 部署 dist/ 静态资源
 npx wrangler dev        # 本地预览
 ```
 
-部署完成后，Wrangler 会在输出中给出线上访问地址（形如 `https://efootball-simulator.<你的子域>.workers.dev`）。
+部署完成后，Wrangler 会在输出中给出线上访问地址（形如 `https://efootballsimulator.<你的子域>.workers.dev`）。
+
+### 使用 Workers Builds（Git 自动构建）部署
+
+在 Cloudflare 控制台 **Workers & Pages → Create → Connect to Git** 选择本仓库后，按以下参数填写：
+
+| 设置项 | 值 |
+| --- | --- |
+| Project name | `efootballsimulator`（需与 `wrangler.jsonc` 中的 `name` 一致） |
+| Build command | `npm run build` |
+| Deploy command | `npx wrangler deploy` |
+| Preview command | `npx wrangler preview`（需 Wrangler ≥ 4.135，本项目已满足） |
+
+注意事项：
+
+- `wrangler.jsonc` 的 `name` 必须与控制台的 Worker / Project name 完全一致，否则构建产物会被部署到另一个 Worker。
+- `compatibility_date` 不要设置为「当前日期之后」，Cloudflare 按 UTC 判定，未来日期会导致部署失败。
+- 每次向 `main` 分支推送提交，Cloudflare 会自动执行 Build → Deploy；其他分支则执行 Preview。
 
 ## 礼包与概率
 
